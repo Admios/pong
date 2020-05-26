@@ -9,8 +9,7 @@
   "scripts": {
     "build:prod": "webpack-cli --mode production",
     "start:dev": "webpack-cli --mode development && open index.html",
-    "watch:dev": "webpack-cli --mode development -w",
-    "start": "webpack-dev-server --open --config webpack.config.js"
+    "watch:dev": "webpack-cli --mode development -w"
   },
   "devDependencies": {
     "ts-loader": "^7.0.5",
