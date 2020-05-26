@@ -1,20 +1,30 @@
 import Point from "./point";
+import Bounds from "./bounds";
+import Context from "./context";
 
-export default class BoundingBox {
-  origin: Point;
-  width: number;
-  height: number;
-  context: CanvasRenderingContext2D;
-  constructor(context: CanvasRenderingContext2D, origin: Point, width: number, height: number) {
+export default abstract class BoundingBox {
+  protected origin: Point;
+  protected width: number;
+  protected height: number;
+  protected context: Context;
+
+  constructor(
+    context: Context,
+    origin: Point,
+    width: number,
+    height: number
+  ) {
     this.origin = origin;
     this.width = width;
     this.height = height;
     this.context = context;
   }
+  
+  abstract get color(): string;
 
   render() {
-    this.context.fillStyle = "#ffffff";
-    this.context.fillRect(
+    this.context.instance.fillStyle = this.color;
+    this.context.instance.fillRect(
       this.origin.x,
       this.origin.y,
       this.width,
@@ -23,7 +33,7 @@ export default class BoundingBox {
     return this;
   }
 
-  get bounds() {
+  get bounds(): Bounds {
     return {
       top: this.origin.y,
       right: this.origin.x + this.width,

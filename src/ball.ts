@@ -1,17 +1,23 @@
 import BoundingBox from "./boundingBox";
 import Point from "./point";
+import { colors, velocities, dimensions } from "./constants";
+import Context from "./context";
 
 export default class Ball extends BoundingBox {
-  speed: { x: number; y: number; };
-  constructor(context: CanvasRenderingContext2D, speed = { x: 400, y: 200 }) {
-    super(context, new Point(0, 0), 20, 20);
-    this.speed = speed;
+  private speed: { x: number; y: number };
+
+  constructor(context: Context, velocity = velocities.ball) {
+    const { height, width } = dimensions.ball;
+    super(context, new Point(0, 0), width, height);
+    this.speed = velocity;
+  }
+
+  get color() {
+    return colors.ball;
   }
 
   move(delta: number) {
-    const {
-      canvas: { width, height },
-    } = this.context;
+    const { width, height } = this.context;
     const { top, right, left, bottom } = this.bounds;
 
     if (left < 0 || right > width) {

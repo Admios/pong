@@ -1,3 +1,4 @@
-import Pong from "./pong";
+import Game from "./game";
+import Context from "./context";
 
-new Pong();
+new Game(new Context());
