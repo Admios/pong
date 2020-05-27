@@ -39,7 +39,9 @@ export default class Game {
   }
 
   init() {
-    this.animate(0);
+    this.court.render();
+    this.human.render();
+    this.machine.render();
   }
 
   render() {

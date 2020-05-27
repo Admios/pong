@@ -18,7 +18,7 @@ export default class Ball extends BoundingBox {
 
     super(
       context,
-      new Point(ballStartingOffset, .5 * courtHeight),
+      new Point(ballStartingOffset, .5 * (courtHeight - height)),
       width,
       height
     );
