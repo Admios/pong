@@ -5,10 +5,11 @@ export const dimensions = {
   court: { height: 800, width: 1000 },
 };
 export const colors = {
-  ball: "#ffffff",
-  court: "#000000",
-  player: "#ffffff",
-  opponent: "red",
+  border: "#F8F8FA",
+  ball: "#D54DFF",
+  court: "#333333",
+  player: "#FF984D",
+  opponent: "#9E4200",
 };
 export const velocities = {
   ball: { x: 400, y: 200 },
