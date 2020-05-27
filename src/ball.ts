@@ -18,7 +18,7 @@ export default class Ball extends BoundingBox {
 
     super(
       context,
-      new Point(ballStartingOffset, courtHeight / 2),
+      new Point(ballStartingOffset, .5 * courtHeight),
       width,
       height
     );
@@ -29,18 +29,15 @@ export default class Ball extends BoundingBox {
     return colors.ball;
   }
 
-  bounce() {
+  bounceX() {
     this.speed.x *= -1;
   }
 
+  bounceY() {
+    this.speed.y *= -1;
+  }
+
   move(delta: number) {
-    const { height } = this.context;
-    const { top, bottom } = this.bounds;
-
-    if (top < 0 || bottom > height) {
-      this.speed.y *= -1;
-    }
-
     this.origin.x += delta * this.speed.x;
     this.origin.y += delta * this.speed.y;
 
