@@ -4,7 +4,7 @@ import Context from "./context";
 import Human from "./human";
 import Machine from "./machine";
 import Score from "./score";
-import Level from "./difficulty";
+import Level from "./level";
 
 export default class Game {
   private ball: Ball;
@@ -14,9 +14,15 @@ export default class Game {
   private context: Context;
   private scores: Score[];
   private level: Level;
+  private paused: boolean = true;
+  private worldClock: number = 0;
 
   constructor(context: Context) {
     this.context = context;
+    this.context.onClick(() => {
+      this.worldClock = 0;
+      this.paused = !this.paused;
+    });
 
     this.court = new Court(context);
     this.ball = new Ball(context);
@@ -28,17 +34,23 @@ export default class Game {
     ];
     this.level = new Level(context);
 
+    this.init();
     this.render();
   }
 
+  init() {
+    this.animate(0);
+  }
+
   render() {
-    let lastUpdate: number = 0;
     const update = (elapsed: number) => {
-      if (lastUpdate) {
-        this.collide();
-        this.animate((elapsed - lastUpdate) / 1000);
+      if (!this.paused) {
+        if (this.worldClock) {
+          this.collide();
+          this.animate((elapsed - this.worldClock) / 1000);
+        }
+        this.worldClock = elapsed;
       }
-      lastUpdate = elapsed;
       requestAnimationFrame(update);
     };
     requestAnimationFrame(update);
@@ -75,7 +87,7 @@ export default class Game {
     this.ball.move(delta).render();
     this.human.render();
     this.machine.move(this.ball).render();
-    this.scores.forEach(_ => _.render());
+    this.scores.forEach((_) => _.render());
     this.level.render();
   }
 }

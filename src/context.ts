@@ -23,6 +23,10 @@ export default class Context {
     this.root.append(canvas);
   }
 
+  onClick(handler: () => void) {
+    this.instance.canvas.addEventListener("click", handler);
+  }
+
   onMove(handler: (this: HTMLCanvasElement, ev: MouseEvent) => void) {
     this.instance.canvas.addEventListener("mousemove", handler);
   }
