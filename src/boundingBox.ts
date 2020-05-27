@@ -8,18 +8,13 @@ export default abstract class BoundingBox {
   protected height: number;
   protected context: Context;
 
-  constructor(
-    context: Context,
-    origin: Point,
-    width: number,
-    height: number
-  ) {
+  constructor(context: Context, origin: Point, width: number, height: number) {
     this.origin = origin;
     this.width = width;
     this.height = height;
     this.context = context;
   }
-  
+
   abstract get color(): string;
 
   render() {
@@ -31,6 +26,23 @@ export default abstract class BoundingBox {
       this.height
     );
     return this;
+  }
+
+  overlaps(box: BoundingBox) {
+    const { top, right, bottom, left } = this.bounds;
+    const {
+      top: targetTop,
+      right: targetRight,
+      bottom: targetBottom,
+      left: targetLeft,
+    } = box.bounds;
+
+    return (
+      bottom > targetTop &&
+      targetBottom > top &&
+      right > targetLeft &&
+      targetRight > left
+    );
   }
 
   get bounds(): Bounds {

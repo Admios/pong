@@ -17,14 +17,15 @@ export default class Game {
     this.player = new Player(context);
     this.opponent = new Opponent(context);
 
-    this.animate();
+    this.render();
   }
 
-  animate() {
+  render() {
     let lastUpdate: number = 0;
     const update = (elapsed: number) => {
       if (lastUpdate) {
-        this.render((elapsed - lastUpdate) / 1000);
+        this.collide();
+        this.animate((elapsed - lastUpdate) / 1000);
       }
       lastUpdate = elapsed;
       requestAnimationFrame(update);
@@ -32,10 +33,16 @@ export default class Game {
     requestAnimationFrame(update);
   }
 
-  render(delta: number) {
+  collide() {
+    if (this.player.overlaps(this.ball) || this.opponent.overlaps(this.ball)) {
+      this.ball.bounce();
+    }
+  }
+
+  animate(delta: number) {
     this.court.render();
     this.ball.move(delta).render();
     this.player.render();
-    this.opponent.move(this.ball.bounds).render();
+    this.opponent.move(this.ball).render();
   }
 }

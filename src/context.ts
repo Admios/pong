@@ -23,7 +23,7 @@ export default class Context {
     this.root.append(canvas);
   }
 
-  onMove(handler: (this: HTMLCanvasElement, ev: MouseEvent) => any) {
+  onMove(handler: (this: HTMLCanvasElement, ev: MouseEvent) => void) {
     this.instance.canvas.addEventListener("mousemove", handler);
   }
 }

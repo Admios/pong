@@ -1,8 +1,8 @@
 import BoundingBox from "./boundingBox";
 import Point from "./point";
 import { paddleFromEdgeDistance, dimensions, colors } from "./constants";
-import Bounds from "./bounds";
 import Context from "./context";
+import Ball from "./ball";
 
 export default class Opponent extends BoundingBox {
   constructor(context: Context) {
@@ -21,7 +21,7 @@ export default class Opponent extends BoundingBox {
     return colors.opponent;
   }
 
-  move(bounds: Bounds) {
+  move({bounds}: Ball) {
     this.origin.y = Math.max(
       0,
       Math.min(

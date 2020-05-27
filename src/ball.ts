@@ -1,6 +1,11 @@
 import BoundingBox from "./boundingBox";
 import Point from "./point";
-import { colors, velocities, dimensions } from "./constants";
+import {
+  colors,
+  velocities,
+  dimensions,
+  paddleFromEdgeDistance,
+} from "./constants";
 import Context from "./context";
 
 export default class Ball extends BoundingBox {
@@ -8,7 +13,15 @@ export default class Ball extends BoundingBox {
 
   constructor(context: Context, velocity = velocities.ball) {
     const { height, width } = dimensions.ball;
-    super(context, new Point(0, 0), width, height);
+    const ballStartingOffset = paddleFromEdgeDistance + dimensions.paddle.width;
+    const courtHeight = dimensions.court.height;
+
+    super(
+      context,
+      new Point(ballStartingOffset, courtHeight / 2),
+      width,
+      height
+    );
     this.speed = velocity;
   }
 
@@ -16,13 +29,13 @@ export default class Ball extends BoundingBox {
     return colors.ball;
   }
 
-  move(delta: number) {
-    const { width, height } = this.context;
-    const { top, right, left, bottom } = this.bounds;
+  bounce() {
+    this.speed.x *= -1;
+  }
 
-    if (left < 0 || right > width) {
-      this.speed.x *= -1;
-    }
+  move(delta: number) {
+    const { height } = this.context;
+    const { top, bottom } = this.bounds;
 
     if (top < 0 || bottom > height) {
       this.speed.y *= -1;
