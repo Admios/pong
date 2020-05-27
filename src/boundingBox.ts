@@ -25,6 +25,7 @@ export default abstract class BoundingBox {
       this.width,
       this.height
     );
+
     return this;
   }
 
