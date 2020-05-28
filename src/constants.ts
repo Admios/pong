@@ -36,3 +36,4 @@ export const messages = {
     "Click to start...",
   ],
 };
+export const levelUpThreshold = 3;

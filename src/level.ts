@@ -13,6 +13,10 @@ export default class Level {
     this.level++;
   }
 
+  get difficulty() {
+    return this.level;
+  }
+
   render() {
     const {
       stats: { top },

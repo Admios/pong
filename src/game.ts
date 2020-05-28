@@ -6,7 +6,8 @@ import Machine from "./machine";
 import Score from "./score";
 import Level from "./level";
 import Message from "./message";
-import { messages } from "./constants";
+import { messages, levelUpThreshold } from "./constants";
+import Player from "./player";
 
 export default class Game {
   private ball: Ball;
@@ -57,7 +58,7 @@ export default class Game {
 
   animate(delta: number) {
     this.court.render();
-    this.ball.move(delta).render();
+    this.ball.move(delta, this.level.difficulty).render();
     this.human.render();
     this.machine.move(this.ball).render();
     this.scores.forEach((_) => _.render());
@@ -82,11 +83,19 @@ export default class Game {
     }
 
     if (right > width) {
-      this.machine.player.updateScore();
+      this.score(this.machine.player);
     }
 
     if (left < 0) {
-      this.human.player.updateScore();
+      this.score(this.human.player);
+    }
+  }
+
+  score(player: Player) {
+    player.updateScore();
+
+    if (player.score % levelUpThreshold === 0) {
+      this.level.up();
     }
   }
 }

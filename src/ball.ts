@@ -18,7 +18,7 @@ export default class Ball extends BoundingBox {
 
     super(
       context,
-      new Point(ballStartingOffset, .5 * (courtHeight - height)),
+      new Point(ballStartingOffset, 0.5 * (courtHeight - height)),
       width,
       height
     );
@@ -37,9 +37,17 @@ export default class Ball extends BoundingBox {
     this.speed.y *= -1;
   }
 
-  move(delta: number) {
-    this.origin.x += delta * this.speed.x;
-    this.origin.y += delta * this.speed.y;
+  move(delta: number, difficulty: number) {
+    let fx = 1;
+    let fy = 1;
+    if (difficulty > 1) {
+      const normal = Math.sqrt(this.speed.x ** 2 + this.speed.y ** 2);
+      fx = Math.abs(this.speed.x / normal) * difficulty * 0.75;
+      fy = Math.abs(this.speed.y / normal) * difficulty * 0.75;
+    }
+
+    this.origin.x += delta * this.speed.x * fx;
+    this.origin.y += delta * this.speed.y * fy;
 
     return this;
   }

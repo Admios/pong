@@ -5,6 +5,11 @@ import Context from "./context";
 import Ball from "./ball";
 import Player from "./player";
 
+const pickRandomNemesis = () => {
+  const nemeses = ["skynet", "voldemort", "dr. doom"];
+  return nemeses[Math.floor(Math.random() * (nemeses.length))];
+};
+
 export default class Machine extends BoundingBox {
   player: Player;
   constructor(context: Context) {
@@ -18,18 +23,19 @@ export default class Machine extends BoundingBox {
       height
     );
 
-    this.player = new Player("skynet", .25);
+    this.player = new Player(pickRandomNemesis(), 0.25);
   }
 
   get color() {
     return colors.opponent;
   }
 
-  move({ bounds }: Ball) {
+  move({ bounds: { top, bottom } }: Ball) {
+    const ballHeight = top - bottom;
     this.origin.y = Math.max(
       0,
       Math.min(
-        bounds.top - 0.5 * this.height,
+        top - 0.5 * (this.height + ballHeight),
         this.context.height - this.height
       )
     );
