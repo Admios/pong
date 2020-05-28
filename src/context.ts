@@ -18,6 +18,7 @@ export default class Context {
     const canvas = document.createElement("canvas");
     canvas.height = height;
     canvas.width = width;
+    canvas.style.cursor = "move";
 
     this.instance = canvas.getContext("2d");
     this.root.append(canvas);

@@ -19,32 +19,25 @@ export default class Game {
 
   constructor(context: Context) {
     this.context = context;
-    this.context.onClick(() => {
-      this.worldClock = 0;
-      this.paused = !this.paused;
-    });
 
-    this.court = new Court(context);
+    this.court = new Court(context).render();
     this.ball = new Ball(context);
-    this.human = new Human(context);
-    this.machine = new Machine(context);
+    this.human = new Human(context).render();
+    this.machine = new Machine(context).render();
     this.scores = [
       new Score(context, this.human.player),
       new Score(context, this.machine.player),
     ];
     this.level = new Level(context);
+    this.context.onClick(() => {
+      this.worldClock = 0;
+      this.paused = !this.paused;
+    });
 
-    this.init();
-    this.render();
+    this.update();
   }
 
-  init() {
-    this.court.render();
-    this.human.render();
-    this.machine.render();
-  }
-
-  render() {
+  update() {
     const update = (elapsed: number) => {
       if (!this.paused) {
         if (this.worldClock) {
@@ -58,6 +51,15 @@ export default class Game {
     requestAnimationFrame(update);
   }
 
+  animate(delta: number) {
+    this.court.render();
+    this.ball.move(delta).render();
+    this.human.render();
+    this.machine.move(this.ball).render();
+    this.scores.forEach((_) => _.render());
+    this.level.render();
+  }
+
   collide() {
     const { top, right, bottom, left } = this.ball.bounds;
     const { height, width } = this.context;
@@ -65,7 +67,7 @@ export default class Game {
     if (
       this.human.overlaps(this.ball) ||
       this.machine.overlaps(this.ball) ||
-      right > width || //for a fun squash mode
+      right > width ||
       left < 0
     ) {
       this.ball.bounceX();
@@ -82,14 +84,5 @@ export default class Game {
     if (left < 0) {
       this.human.player.updateScore();
     }
-  }
-
-  animate(delta: number) {
-    this.court.render();
-    this.ball.move(delta).render();
-    this.human.render();
-    this.machine.move(this.ball).render();
-    this.scores.forEach((_) => _.render());
-    this.level.render();
   }
 }

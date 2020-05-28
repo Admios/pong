@@ -18,7 +18,7 @@ export default class Machine extends BoundingBox {
       height
     );
 
-    this.player = new Player("evil AI", .25);
+    this.player = new Player("skynet", .25);
   }
 
   get color() {
