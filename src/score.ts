@@ -12,17 +12,19 @@ export default class Score {
 
   render() {
     const {
-      stats: { top, maxWidth },
+      stats: { top },
     } = dimensions;
 
     const ctx = this.context.instance;
+    const score = this.player.toString();
     ctx.fillStyle = colors.text;
-    ctx.font = fonts.stats;
+    const { size, family, style } = fonts.stats;
+    ctx.font = `${style} ${size}px ${family}`;
     ctx.fillText(
-      this.player.toString(),
-      this.player.screenOffsetFactor * this.context.width - 0.5 * maxWidth,
-      top,
-      maxWidth
+      score,
+      this.player.screenOffsetFactor * this.context.width -
+        0.5 * ctx.measureText(score).width,
+      top
     );
   }
 }

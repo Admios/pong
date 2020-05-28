@@ -5,6 +5,8 @@ import Human from "./human";
 import Machine from "./machine";
 import Score from "./score";
 import Level from "./level";
+import Message from "./message";
+import { messages } from "./constants";
 
 export default class Game {
   private ball: Ball;
@@ -16,6 +18,7 @@ export default class Game {
   private level: Level;
   private paused: boolean = true;
   private worldClock: number = 0;
+  message: Message;
 
   constructor(context: Context) {
     this.context = context;
@@ -24,6 +27,7 @@ export default class Game {
     this.ball = new Ball(context);
     this.human = new Human(context).render();
     this.machine = new Machine(context).render();
+    this.message = new Message(context).render(messages.intro);
     this.scores = [
       new Score(context, this.human.player),
       new Score(context, this.machine.player),

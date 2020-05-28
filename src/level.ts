@@ -15,18 +15,19 @@ export default class Level {
 
   render() {
     const {
-      stats: { top, maxWidth },
+      stats: { top },
     } = dimensions;
     const { width, height } = this.context;
 
     const ctx = this.context.instance;
+    const level = `level: ${this.level.toString()}`;
     ctx.fillStyle = colors.text;
-    ctx.font = fonts.stats;
+    const { size, family, style } = fonts.stats;
+    ctx.font = `${style} ${size}px ${family}`;
     ctx.fillText(
-      `level: ${this.level.toString()}`,
-      0.5 * (width - maxWidth),
-      height - top,
-      maxWidth
+      level,
+      0.5 * (width - ctx.measureText(level).width),
+      height - top
     );
   }
 }
