@@ -1,4 +1,4 @@
-export const paddleFromEdgeDistance = 40;
+export const paddleFromEdgeDistance = 0;
 export const dimensions = {
   paddle: { height: 150, width: 30 },
   ball: { height: 25, width: 25 },

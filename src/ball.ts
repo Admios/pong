@@ -9,7 +9,7 @@ import {
 import Context from "./context";
 
 export default class Ball extends BoundingBox {
-  private speed: { x: number; y: number };
+  speed: { x: number; y: number };
 
   constructor(context: Context, velocity = velocities.ball) {
     const { height, width } = dimensions.ball;
