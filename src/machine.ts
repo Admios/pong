@@ -12,7 +12,7 @@ const pickRandomNemesis = () => {
 
 export default class Machine extends BoundingBox {
   player: Player;
-  private confusion: number;
+  private uncertainty: number;
   constructor(context: Context) {
     const { height, width } = dimensions.paddle;
     const { height: contextHeight } = context;
@@ -25,7 +25,7 @@ export default class Machine extends BoundingBox {
     );
 
     this.player = new Player(pickRandomNemesis(), 0.25);
-    this.confusion = 0;
+    this.uncertainty = 0;
   }
 
   get color() {
@@ -35,20 +35,24 @@ export default class Machine extends BoundingBox {
   move({ bounds: { top, bottom, left }, speed }: Ball) {
     const ballHeight = bottom - top;
     const ballMovingAway = speed.x < 0;
+    const ballRebounded = left > this.bounds.right;
 
     if (ballMovingAway) {
-      if (!this.confusion) {
-        const confusionDistance = 0.5 * this.height + ballHeight;
+      if (!this.uncertainty) {
+        const confusionDistance = 0.5 * this.height + 1.5 * ballHeight;
         const [max, min] = [confusionDistance, -confusionDistance];
-        this.confusion = Math.floor(Math.random() * (max - min + 1)) + min;
+        this.uncertainty = Math.floor(Math.random() * (max - min + 1)) + min;
       }
-    } else if (left > this.bounds.right) {
-      this.confusion = Math.max(1, this.confusion * 0.9) - 1;
+    } else if (ballRebounded) {
+      this.uncertainty = Math.max(1, this.uncertainty * 0.9) - 1;
     }
 
     this.origin.y = Math.max(
       -0.5 * this.height,
-      Math.min(top - this.confusion, this.context.height - 0.5 * this.height)
+      Math.min(
+        top - this.uncertainty - 0.5 * this.height,
+        this.context.height - 0.5 * this.height
+      )
     );
 
     return this;
