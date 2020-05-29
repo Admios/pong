@@ -10,6 +10,7 @@ import Context from "./context";
 
 export default class Ball extends BoundingBox {
   speed: { x: number; y: number };
+  private hits: number;
 
   constructor(context: Context, velocity = velocities.ball) {
     const { height, width } = dimensions.ball;
@@ -23,6 +24,7 @@ export default class Ball extends BoundingBox {
       height
     );
     this.speed = velocity;
+    this.hits = 0;
   }
 
   get color() {
@@ -31,10 +33,15 @@ export default class Ball extends BoundingBox {
 
   bounceX() {
     this.speed.x *= -1;
+    this.hits++;
   }
 
   bounceY() {
     this.speed.y *= -1;
+  }
+
+  get totalHits() {
+    return this.hits;
   }
 
   move(delta: number, difficulty: number) {

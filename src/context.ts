@@ -24,7 +24,7 @@ export default class Context {
     this.root.append(canvas);
   }
 
-  onClick(handler: () => void) {
+  onPauseOrResume(handler: () => void) {
     this.instance.canvas.addEventListener("click", handler);
   }
 

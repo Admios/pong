@@ -6,7 +6,12 @@ import Machine from "./machine";
 import Score from "./score";
 import Level from "./level";
 import Message from "./message";
-import { messages, levelUpThreshold } from "./constants";
+import {
+  messages,
+  scoreToLevelUp,
+  hitsToLevelUp,
+  maxDifficulty,
+} from "./constants";
 import Player from "./player";
 
 export default class Game {
@@ -19,27 +24,34 @@ export default class Game {
   private level: Level;
   private paused: boolean = true;
   private worldClock: number = 0;
-  message: Message;
+  private message: Message;
+  private playAgain: boolean = false;
 
   constructor(context: Context) {
     this.context = context;
 
-    this.court = new Court(context).render();
-    this.ball = new Ball(context);
-    this.human = new Human(context).render();
-    this.machine = new Machine(context).render();
-    this.message = new Message(context).render(messages.intro);
-    this.scores = [
-      new Score(context, this.human.player),
-      new Score(context, this.machine.player),
-    ];
-    this.level = new Level(context);
-    this.context.onClick(() => {
+    this.context.onPauseOrResume(() => {
       this.worldClock = 0;
       this.paused = !this.paused;
+      if (this.playAgain) this.initialize();
     });
 
+    this.initialize();
+    this.message = new Message(context).render(messages.intro);
+
     this.update();
+  }
+
+  initialize() {
+    this.court = new Court(this.context).render();
+    this.ball = new Ball(this.context);
+    this.human = new Human(this.context).render();
+    this.machine = new Machine(this.context).render();
+    this.scores = [
+      new Score(this.context, this.human.player),
+      new Score(this.context, this.machine.player),
+    ];
+    this.level = new Level(this.context);
   }
 
   update() {
@@ -48,6 +60,7 @@ export default class Game {
         if (this.worldClock) {
           this.collide();
           this.animate((elapsed - this.worldClock) / 1000);
+          this.checkGameOver();
         }
         this.worldClock = elapsed;
       }
@@ -76,6 +89,9 @@ export default class Game {
       left < 0
     ) {
       this.ball.bounceX();
+      if (this.ball.totalHits % hitsToLevelUp === 0) {
+        this.level.up();
+      }
     }
 
     if (top < 0 || bottom > height) {
@@ -91,10 +107,26 @@ export default class Game {
     }
   }
 
+  checkGameOver() {
+    if (this.level.difficulty >= maxDifficulty) {
+      this.paused = true;
+      this.playAgain = true;
+
+      const [winner] = [this.human, this.machine].sort(
+        (a, b) => b.player.score - a.player.score
+      );
+      this.message.render([
+        "Game Over!!!",
+        `${winner.player.name} has triumphed`,
+        "click to play again.",
+      ]);
+    }
+  }
+
   score(player: Player) {
     player.updateScore();
 
-    if (player.score % levelUpThreshold === 0) {
+    if (player.score % scoreToLevelUp === 0) {
       this.level.up();
     }
   }

@@ -24,7 +24,7 @@ export const fonts = {
     style: "bold",
   },
   message: {
-    size: 20,
+    size: 22,
     family: "Courier New",
     style: "bold",
   },
@@ -36,4 +36,6 @@ export const messages = {
     "Click to start...",
   ],
 };
-export const levelUpThreshold = 3;
+export const scoreToLevelUp = 3;
+export const hitsToLevelUp = 15;
+export const maxDifficulty = 7;
