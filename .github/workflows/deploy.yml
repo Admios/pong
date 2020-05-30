@@ -29,8 +29,9 @@ jobs:
       run: yarn build:prod
       
     - name: version
-      run: echo todo: rename main.js with version
+      run: echo todo rename main.js with version
       
     - name: deploy
-      env: ${{ secrets.FIREBASE_TOKEN }}
+      env: 
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       run: yarn deploy
