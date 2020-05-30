@@ -10,7 +10,7 @@
     "build:prod": "webpack-cli --mode production",
     "start:dev": "webpack-cli --mode development && open index.html",
     "watch:dev": "webpack-cli --mode development -w",
-    "deploy": "firebase deploy --only hosting --project admios.pong"
+    "deploy": "firebase deploy --only hosting --project admios-pong"
   },
   "devDependencies": {
     "firebase-tools": "^8.4.1",
