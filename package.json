@@ -9,7 +9,8 @@
   "scripts": {
     "build:prod": "webpack-cli --mode production",
     "start:dev": "webpack-cli --mode development && open index.html",
-    "watch:dev": "webpack-cli --mode development -w"
+    "watch:dev": "webpack-cli --mode development -w",
+    "deploy": "firebase deploy --only hosting"
   },
   "devDependencies": {
     "ts-loader": "^7.0.5",
