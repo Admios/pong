@@ -28,8 +28,10 @@ jobs:
     - name: build
       run: yarn build:prod
       
-    # Runs a set of commands using the runners shell
-    - name: sample
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+    - name: version
+      run: echo todo: rename main.js with version
+      
+    - name: deploy
+      env: 
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      run: yarn deploy
