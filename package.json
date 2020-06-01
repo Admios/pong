@@ -1,6 +1,6 @@
 {
   "name": "admios-pong",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a classic pong game implementation",
   "main": "index.js",
   "author": "Anas Karkoukli",
@@ -9,7 +9,7 @@
   "scripts": {
     "build:prod": "webpack-cli --config webpack.config.prod.js",
     "start:dev": "webpack-cli --config webpack.config.dev.js && open index.html",
-    "watch:dev": "webpack-cli --config webpack.config.dev.js development -w",
+    "watch:dev": "webpack-cli --config webpack.config.dev.js -w",
     "deploy": "firebase deploy --only hosting --project admios-pong"
   },
   "devDependencies": {
