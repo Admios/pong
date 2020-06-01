@@ -25,10 +25,13 @@ export default class Context {
   }
 
   onPauseOrResume(handler: () => void) {
-    this.instance.canvas.addEventListener("click", handler);
+    this.instance.canvas.addEventListener("click", (event: MouseEvent) => {
+      event.stopPropagation();
+      handler();
+    });
   }
 
-  onMove(handler: (this: HTMLCanvasElement, ev: MouseEvent) => void) {
+  onMove(handler: (this: HTMLCanvasElement, event: MouseEvent) => void) {
     this.instance.canvas.addEventListener("mousemove", handler);
   }
 }

@@ -25,14 +25,13 @@ export default class Game {
   private paused: boolean = true;
   private worldClock: number = 0;
   private message: Message;
-  private playAgain: boolean = false;
+  private playAgain: boolean;
 
   constructor(context: Context) {
     this.context = context;
 
     this.context.onPauseOrResume(() => {
-      this.worldClock = 0;
-      this.paused = !this.paused;
+      this.pauseOrResume();
       if (this.playAgain) this.initialize();
     });
 
@@ -52,6 +51,7 @@ export default class Game {
       new Score(this.context, this.machine.player),
     ];
     this.level = new Level(this.context);
+    this.playAgain = false;
   }
 
   update() {
@@ -129,5 +129,10 @@ export default class Game {
     if (player.score % scoreToLevelUp === 0) {
       this.level.up();
     }
+  }
+
+  pauseOrResume() {
+    this.worldClock = 0;
+    this.paused = !this.paused;
   }
 }
