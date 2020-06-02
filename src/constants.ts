@@ -39,3 +39,4 @@ export const messages = {
 export const scoreToLevelUp = 3;
 export const hitsToLevelUp = 15;
 export const maxDifficulty = 7;
+export const nemeses = ["skynet", "voldemort", "dr. doom"];

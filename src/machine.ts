@@ -1,12 +1,11 @@
 import BoundingBox from "./boundingBox";
 import Point from "./point";
-import { paddleFromEdgeDistance, dimensions, colors, fonts } from "./constants";
+import { paddleFromEdgeDistance, dimensions, colors, nemeses } from "./constants";
 import Context from "./context";
 import Ball from "./ball";
 import Player from "./player";
 
 const pickRandomNemesis = () => {
-  const nemeses = ["skynet", "voldemort", "dr. doom"];
   return nemeses[Math.floor(Math.random() * nemeses.length)];
 };
 
