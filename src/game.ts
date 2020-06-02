@@ -31,7 +31,8 @@ export default class Game {
     this.context = context;
 
     this.context.onPauseOrResume(() => {
-      this.pauseOrResume();
+      this.worldClock = 0;
+      this.paused = !this.paused;
       if (this.playAgain) this.initialize();
     });
 
@@ -131,8 +132,8 @@ export default class Game {
     }
   }
 
-  pauseOrResume() {
+  pause() {
     this.worldClock = 0;
-    this.paused = !this.paused;
+    this.paused = true;
   }
 }

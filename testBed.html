@@ -1,7 +1,7 @@
 <html>
 
   <head>
-    <script src="dist/main_v1.0.2.js"></script>
+    <script src="dist/main_v1.0.3.js"></script>
     <style>
       body {
         padding: 0;
@@ -46,19 +46,20 @@
     </div>
 
     <script>
-      document.getElementById("hotzone").addEventListener("click", () => {
-        const modal = document.getElementById("modal");
-        const root = document.getElementById("root");
-        
-        const { Context, Game } = window.admios.pong;
-        const game = new Game(new Context(root));
+      const modal = document.getElementById("modal");
+      const root = document.getElementById("root");
+      const close = modal.querySelector("button");
+      const hotzone = document.getElementById("hotzone");
+      const { Context, Game } = window.admios.pong;
+      const game = new Game(new Context(root));
 
-        modal.style.display = "flex";
-        modal.addEventListener("click", (e) => {
-          game.pause();
-          root.innerHTML = "";
-          e.target.style.display = "none";
-        });
+      modal.addEventListener("click", (e) => {
+        game.pause();
+        modal.style.display = "none";
+      });
+
+      hotzone.addEventListener("click", () => {
+        modal.style.display = "flex";  
       });
     </script>
   </body>

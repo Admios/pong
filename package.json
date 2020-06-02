@@ -1,6 +1,6 @@
 {
   "name": "admios-pong",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a classic pong game implementation",
   "main": "index.js",
   "author": "Anas Karkoukli",
