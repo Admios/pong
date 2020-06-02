@@ -1,6 +1,6 @@
 export const paddleFromEdgeDistance = 0;
 export const dimensions = {
-  paddle: { height: 150, width: 30 },
+  paddle: { width: 30 },
   ball: { height: 25, width: 25 },
   court: { height: 600, width: 1000 },
   border: { width: 5 },

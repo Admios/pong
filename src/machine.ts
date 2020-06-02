@@ -14,14 +14,15 @@ export default class Machine extends BoundingBox {
   player: Player;
   private uncertainty: number;
   constructor(context: Context) {
-    const { height, width } = dimensions.paddle;
+    const { width } = dimensions.paddle;
     const { height: contextHeight } = context;
+    const paddleHeight = .25 * contextHeight;
 
     super(
       context,
-      new Point(paddleFromEdgeDistance, 0.5 * (contextHeight - height)),
+      new Point(paddleFromEdgeDistance, 0.5 * (contextHeight - paddleHeight)),
       width,
-      height
+      paddleHeight
     );
 
     this.player = new Player(pickRandomNemesis(), 0.25);
