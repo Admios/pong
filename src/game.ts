@@ -109,7 +109,7 @@ export default class Game {
   }
 
   checkGameOver() {
-    if (this.level.difficulty >= 0) {
+    if (this.level.difficulty >= maxDifficulty) {
       this.paused = true;
       this.playAgain = true;
       
