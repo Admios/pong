@@ -35,6 +35,11 @@ export const messages = {
     "Help us make this game better",
     "Click to start...",
   ],
+  outro: (humanScore: number, machineScore: number): string[] => [
+    `You ${humanScore > machineScore ? "Won" : "Lost"}!!`,
+    "The game has a few bugs",
+    "Check out the repo and help us make it better",
+  ],
 };
 export const scoreToLevelUp = 3;
 export const hitsToLevelUp = 15;

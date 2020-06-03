@@ -109,18 +109,13 @@ export default class Game {
   }
 
   checkGameOver() {
-    if (this.level.difficulty >= maxDifficulty) {
+    if (this.level.difficulty >= 0) {
       this.paused = true;
       this.playAgain = true;
-
-      const [winner] = [this.human, this.machine].sort(
-        (a, b) => b.player.score - a.player.score
+      
+      this.message.render(
+        messages.outro(this.human.player.score, this.machine.player.score)
       );
-      this.message.render([
-        "Game Over!!!",
-        `${winner.player.name} has triumphed`,
-        "click to play again.",
-      ]);
     }
   }
 

@@ -1,7 +1,7 @@
 <html>
 
   <head>
-    <script src="dist/main_v1.0.3.js"></script>
+    <script src="dist/main_v1.0.5.js"></script>
     <style>
       body {
         padding: 0;
@@ -35,6 +35,17 @@
         display: none;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
+      }
+
+      #modal a {
+        color: #FF984D;
+      }
+
+      #controls{
+        display: flex;
+        justify-content: space-around;
+        align-self: stretch;
       }
     </style>
 
@@ -46,6 +57,10 @@
     <div id="hotzone"></div>
     <div id="modal">
       <div id="root"></div>
+      <div id="controls">
+        <a href="https://github.com/Admios/pong" target="_blank">checkout repo</a>
+        <a id="close">close</a>
+      </div>
     </div>
 
     <script>
