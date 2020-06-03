@@ -1,7 +1,7 @@
 <html>
 
   <head>
-    <script src="dist/main_v1.0.6.js"></script>
+    <script src="main_v%VERSION%.js"></script>
     <style>
       body {
         padding: 0;
@@ -44,15 +44,19 @@
 
       #controls{
         display: flex;
-        justify-content: space-around;
+        justify-content: space-evenly;
         align-self: stretch;
+      }
+
+      h1, h6{
+        display: inline-block;
       }
     </style>
 
   </head>
 
   <body>
-    <h1>Pong Game Host Test</h1>
+    <h1>Pong Game Test (%VERSION%)</h1>
     <h4>Hover over the hotzone!</h4>
     <div id="hotzone"></div>
     <div id="modal">
@@ -69,7 +73,7 @@
       const close = modal.querySelector("button");
       const hotzone = document.getElementById("hotzone");
       const { Context, Game } = window.admios.pong;
-      const game = new Game(new Context(root, { height: 510, width: 850 }));
+      const game = new Game(new Context(root, { height: 480, width: 850 }));
 
       modal.addEventListener("click", (e) => {
         game.pause();

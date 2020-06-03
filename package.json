@@ -1,6 +1,6 @@
 {
   "name": "admios-pong",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "a classic pong game implementation",
   "main": "index.js",
   "author": "Anas Karkoukli",
@@ -8,17 +8,28 @@
   "private": true,
   "scripts": {
     "build:prod": "webpack-cli --config webpack.config.prod.js",
+    "postbuild:prod": "node ./buildScripts/postBuild.js",
     "start:dev": "webpack-cli --config webpack.config.dev.js && open index.html",
     "watch:dev": "webpack-cli --config webpack.config.dev.js -w",
-    "deploy": "firebase deploy --only hosting --project admios-pong"
+    "deploy": "firebase deploy --only hosting --project admios-pong",
+    "test": "jest --env=node",
+    "test:dev": "yarn test --watch"
   },
   "devDependencies": {
+    "@types/jest": "^25.2.3",
     "firebase-tools": "^8.4.1",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.1.0",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.3",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    }
   }
 }
