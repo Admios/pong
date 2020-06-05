@@ -18,18 +18,18 @@ test("counts number of hits against player paddle", () => {
 
 test("moves in the opposite direction when it hits an obstacle", () => {
   const difficulty = 1;
-  const delta = 1;
+  const dt = 1;
   const ball = new Ball(context, { x: 1, y: 1 });
   const { right } = ball.bounds;
 
   ball.bounceX();
-  ball.move(delta, difficulty);
+  ball.move(dt, difficulty);
 
   expect(ball.bounds.right).toBeLessThan(right);
 
   const { top } = ball.bounds;
   ball.bounceY();
-  ball.move(1, 1);
+  ball.move(dt, difficulty);
 
   expect(ball.bounds.top).toBeLessThan(top);
 });

@@ -15,14 +15,15 @@ export default class Message {
     ctx.shadowColor = colors.opponent;
     ctx.shadowBlur = 10;
     ctx.fillStyle = colors.text;
+    const spacing = 1.15;
     text.forEach((line, index) => {
       ctx.fillText(
         line,
         0.5 * (width - ctx.measureText(line).width),
-        0.5 * height + (index + 1) * size * 1.15
+        0.5 * (height - size * text.length) + (index + 1) * size * spacing
       );
-    })
-    
+    });
+
     return this;
   }
 }

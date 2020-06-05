@@ -24,7 +24,7 @@ export const fonts = {
     style: "bold",
   },
   message: {
-    size: 22,
+    size: 20,
     family: "Courier New",
     style: "bold",
   },
@@ -32,16 +32,29 @@ export const fonts = {
 export const messages = {
   intro: [
     "Welcome to Admios!",
-    "Help us make this game better",
+    "",
+    "For a lot of us, videogames were our first",
+    "introduction to the power of coding. And pong",
+    "was the game that introduced the world to the" ,"power of videogames.",
+    "",
+    "We've recreated it here, and left several",
+    "coding challenges for you in the repo.",
+    "Take a look, spot the issues, submit a PR and",
+    "maybe we'll invite you for an interview... Enjoy!",
+    "",
     "Click to start...",
   ],
   outro: (humanScore: number, machineScore: number): string[] => [
     `You ${humanScore > machineScore ? "Won" : "Lost"}!!`,
-    "The game has a few bugs",
-    "Check out the repo and help us make it better",
+    "",
+    "Thanks for playing!",
+    "If you have some time, take a look at the repo and see",
+    "if you can solve any of the challenges we've left for you.",
+    "",
+    "Enjoy!",
   ],
 };
 export const scoreToLevelUp = 3;
-export const hitsToLevelUp = 15;
+export const hitsToLevelUp = 9;
 export const maxDifficulty = 7;
 export const nemeses = ["skynet", "voldemort", "dr. doom"];
