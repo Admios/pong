@@ -31,5 +31,8 @@
     "transform": {
       "^.+\\.(ts|tsx)$": "ts-jest"
     }
+  },
+  "resolutions": {
+    "webpack/**/serialize-javascript": "^3.1.0"
   }
 }
