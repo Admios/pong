@@ -41,8 +41,9 @@ Deploys the minified JavaScript assets and test page to Google Cloud Platform us
 
 1. Add a reference to the deployed script
 ```HTML
-<script src="https://admios-pong.web.app/main_v1.0.1.js"></script>
+<script src="https://admios-pong.web.app/main_v<LATEST>.js"></script>
 ```
+To get the latest version, check out the test <a href="https://admios-pong.web.app/test" target="_blank">playground page</a>
 
 The Game classes are added to the global `window` object with the following namespace: `window.admios.pong`
 
