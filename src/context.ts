@@ -16,6 +16,7 @@ export default class Context {
     this.height = height;
     
     const canvas = document.createElement("canvas");
+    canvas.id = 'game'
     canvas.height = height;
     canvas.width = width;
     canvas.style.cursor = "move";
