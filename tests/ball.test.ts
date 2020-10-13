@@ -1,5 +1,6 @@
 import Ball from "../src/ball";
 import Context from "../src/context";
+import { colors } from "../src/constants";
 jest.mock("../src/context");
 let context: Context;
 
@@ -32,4 +33,35 @@ test("moves in the opposite direction when it hits an obstacle", () => {
   ball.move(dt, difficulty);
 
   expect(ball.bounds.top).toBeLessThan(top);
+});
+
+test("moves in the opposite direction when it hits an obstacle with difficulty greater than 2", () => {
+  const difficulty = 2;
+  const dt = 1;
+  const ball = new Ball(context, { x: 1, y: 1 });
+  const { right } = ball.bounds;
+
+  ball.bounceX();
+  ball.move(dt, difficulty);
+
+  expect(ball.bounds.right).toBeLessThan(right);
+
+  const { top } = ball.bounds;
+  ball.bounceY();
+  const out = ball.move(dt, difficulty);
+
+  expect(ball.bounds.top).toBeLessThan(top);
+});
+
+test("match ball color and colors constan", () => {
+  const ball = new Ball(context);
+  expect(ball.color).toBe(colors.ball);
+});
+
+test("match ball color and colors constan", () => {
+  const mockCallfFllText = jest.fn(x => {});
+  context.instance = { fillText: mockCallfFllText } as unknown as CanvasRenderingContext2D
+  const ball = new Ball(context);
+  ball.render()
+  expect(mockCallfFllText.mock.calls.length).toBe(1);
 });
