@@ -3,6 +3,7 @@ import Point from "./point";
 import { paddleFromEdgeDistance, dimensions, colors, fonts } from "./constants";
 import Context from "./context";
 import Player from "./player";
+import { Keyboard } from "./constants"
 
 export default class Human extends BoundingBox {
   player: Player;
@@ -23,7 +24,13 @@ export default class Human extends BoundingBox {
 
     this.context.onMove((e) => {
       this.origin.y = e.offsetY - 0.5 * this.height;
-    });
+    }, (e: KeyboardEvent) => {
+      switch (e.key) {
+        case Keyboard.ARROW_UP: this.origin.y -= 20; break;
+        case Keyboard.ARROW_DOWN: this.origin.y += 20; break;
+      }
+    }
+    );
 
     this.player = new Player("player", .75);
   }

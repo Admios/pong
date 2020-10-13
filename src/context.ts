@@ -16,6 +16,7 @@ export default class Context {
     this.height = height;
     
     const canvas = document.createElement("canvas");
+    canvas.tabIndex = 1
     canvas.id = 'game'
     canvas.height = height;
     canvas.width = width;
@@ -32,7 +33,9 @@ export default class Context {
     });
   }
 
-  onMove(handler: (this: HTMLCanvasElement, event: MouseEvent) => void) {
-    this.instance.canvas.addEventListener("mousemove", handler);
+  onMove(handler: (this: HTMLCanvasElement, event: MouseEvent) => void, 
+         handlerKeyPress: (this: HTMLCanvasElement, event: KeyboardEvent) => void) {
+    this.instance.canvas.addEventListener("mousemove", handler, false);
+    this.instance.canvas.addEventListener("keydown", handlerKeyPress);
   }
 }
