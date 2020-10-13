@@ -58,4 +58,16 @@ export default class Ball extends BoundingBox {
 
     return this;
   }
+
+  render() {
+    this.context.instance.fillStyle = this.color;
+    this.context.instance.font = '50px serif'
+    this.context.instance.fillText(
+      'A',
+      this.origin.x,
+      this.origin.y,
+    );
+
+    return this;
+  }
 }
