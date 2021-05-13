@@ -58,3 +58,7 @@ export const scoreToLevelUp = 3;
 export const hitsToLevelUp = 9;
 export const maxDifficulty = 7;
 export const nemeses = ["skynet", "voldemort", "dr. doom"];
+export const Keyboard = {
+  ARROW_UP: 'ArrowUp',
+  ARROW_DOWN: 'ArrowDown'
+}
